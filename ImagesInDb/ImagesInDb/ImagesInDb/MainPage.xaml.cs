@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Plugin.Media;
 using TasteBeer.Database.Entity;
 using Xamarin.Forms;
@@ -11,16 +13,31 @@ namespace ImagesInDb
 {
     public partial class MainPage : ContentPage
     {
+        private ObservableCollection<BeerImage> beerImages;
+
+
+        //Creating TapGestureRecognizers  
+   
+
         public MainPage()
         {
             InitializeComponent();
 
-            List<BeerImage> beerImages2 = App.Database.GetBeerImagesAsync().Result;
+    
+
+            imageC.Source = ImageSource.FromResource("ImagesInDb.camera.png");
+
+            imgC.Source = ImageSource.FromResource("ImagesInDb.camera.png");
+            
+
+
+
+            beerImages =new ObservableCollection<BeerImage>(  App.Database.GetBeerImagesAsync().Result );
             /*
             image.Source = Xamarin.Forms.ImageSource.FromStream(
               () => new MemoryStream(Convert.FromBase64String(beerImages2[0].Image)));
             */
-            if (beerImages2.Count > 0) listviewWithImages.ItemsSource = beerImages2;
+            if (beerImages.Count > 0) listviewWithImages.ItemsSource = beerImages;
 
             takePhoto.Clicked += async (sender, args) =>
             {
@@ -56,7 +73,7 @@ namespace ImagesInDb
 
                 await App.Database.SaveBeerImageAsync(beer);
 
-                List<BeerImage> beerImages = await App.Database.GetBeerImagesAsync();
+                beerImages.Add(beer);
                     
             };
 
