@@ -23,13 +23,11 @@ namespace ImagesInDb
         {
             InitializeComponent();
 
-    
-
-            imageC.Source = ImageSource.FromResource("ImagesInDb.camera.png");
-
-            imgC.Source = ImageSource.FromResource("ImagesInDb.camera.png");
-            
-
+            ToolbarItem toolbar = new ToolbarItem();
+            toolbar.Icon = "camera.png";
+                
+          
+            this.ToolbarItems.Add(new ToolbarItem {Icon = "camera.png", Command = new Command(this.TakePhoto)});
 
 
             beerImages =new ObservableCollection<BeerImage>(  App.Database.GetBeerImagesAsync().Result );
@@ -39,7 +37,14 @@ namespace ImagesInDb
             */
             if (beerImages.Count > 0) listviewWithImages.ItemsSource = beerImages;
 
-            takePhoto.Clicked += async (sender, args) =>
+        //    takePhoto.Clicked += async (sender, args) =>
+           
+
+
+        }
+
+        private async void TakePhoto()
+        {
             {
                 await CrossMedia.Current.Initialize();
 
@@ -66,7 +71,7 @@ namespace ImagesInDb
                 var stream2 = file.GetStream();
 
                 System.IO.BinaryReader br = new System.IO.BinaryReader(stream2);
-                Byte[] bytes = br.ReadBytes((Int32) stream2.Length);
+                Byte[] bytes = br.ReadBytes((Int32)stream2.Length);
                 string base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
 
                 beer.ImageRaw = base64String;
@@ -74,10 +79,8 @@ namespace ImagesInDb
                 await App.Database.SaveBeerImageAsync(beer);
 
                 beerImages.Add(beer);
-                    
+
             };
-
-
         }
     }
 }
