@@ -4,15 +4,18 @@
              x:Class="ImagesInDb.MainPage"
               >
 
- <StackLayout>
-   <Button x:Name="takePhoto" ></Button>
-
-   <Image x:Name="imageC"></Image>
+ <StackLayout >
+   <Label x:Name="ix"></Label>
+   <Image x:Name="imageC" Aspect="AspectFit"></Image>
 
    <ListView x:Name="listviewWithImages">
      <ListView.ItemTemplate>
        <DataTemplate>
-         <ImageCell ImageSource="{Binding Image}" Text="{Binding Id}"/>
+
+         
+           <ImageCell ImageSource="{Binding Image}" Text="{Binding Id}"/>
+     
+        
        </DataTemplate>
      </ListView.ItemTemplate>
    </ListView>

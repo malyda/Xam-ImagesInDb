@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 // TODO show image after take
 // TODO refactor
+
+// TODO delete file after take
+// TODO resize photo to optimal size
 namespace ImagesInDb
 {
     public class App : Application
