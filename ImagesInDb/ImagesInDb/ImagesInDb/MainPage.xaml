@@ -6,7 +6,6 @@
 
  <StackLayout >
    <Label x:Name="ix" HorizontalTextAlignment="Center" ></Label>
-   <Button x:Name="alertButton" Clicked="Alert"></Button>
    <Image x:Name="imageC" Aspect="AspectFit" HeightRequest="200"></Image>
 
    <ListView x:Name="listviewWithImages">

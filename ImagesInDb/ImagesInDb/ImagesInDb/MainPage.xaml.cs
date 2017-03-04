@@ -25,7 +25,7 @@ namespace ImagesInDb
         public MainPage()
         {
             InitializeComponent();
-         
+            Title = "Main Page";
             Init();
 
 
@@ -65,6 +65,7 @@ namespace ImagesInDb
             toolbar.Icon = "camera.png";
 
             this.ToolbarItems.Add(new ToolbarItem { Icon = "camera.png", Command = new Command(this.TakePhotoAndSave) });
+           
         }
 
         private void GetBeersFromDbAndDislpay()
