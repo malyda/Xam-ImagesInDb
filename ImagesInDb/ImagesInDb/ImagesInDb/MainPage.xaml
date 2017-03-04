@@ -5,19 +5,34 @@
               >
 
  <StackLayout >
-   <Label x:Name="ix"></Label>
-   <Image x:Name="imageC" Aspect="AspectFit"></Image>
+   <Label x:Name="ix" HorizontalTextAlignment="Center"></Label>
+   <Image x:Name="imageC" Aspect="AspectFit" HeightRequest="200"></Image>
 
    <ListView x:Name="listviewWithImages">
-     <ListView.ItemTemplate>
-       <DataTemplate>
+       <ListView.ItemTemplate>
+         <DataTemplate>
+           <ViewCell>
+              <Grid HeightRequest="200">
+               <Grid.RowDefinitions>
+                 <RowDefinition Height="*" ></RowDefinition>
+               </Grid.RowDefinitions>
+               <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="*"></ColumnDefinition>
+                 <ColumnDefinition Width="5*"></ColumnDefinition>
+               </Grid.ColumnDefinitions>
+                
+                <Image  Source="{Binding Image}" WidthRequest="150" HeightRequest="150" Grid.Row="0" Grid.Column="0"  HorizontalOptions="Center" Aspect="AspectFill" Margin="5"></Image>
+               <Label Text="{Binding Id}" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="End" ></Label>
+          
+             </Grid>
+           </ViewCell>
 
-         
-           <ImageCell ImageSource="{Binding Image}" Text="{Binding Id}"/>
-     
-        
-       </DataTemplate>
-     </ListView.ItemTemplate>
-   </ListView>
- </StackLayout>
+         </DataTemplate>
+       </ListView.ItemTemplate>
+
+     </ListView>
+
+
+
+</StackLayout>
 </ContentPage>

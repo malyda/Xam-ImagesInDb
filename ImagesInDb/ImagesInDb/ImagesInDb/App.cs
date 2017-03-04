@@ -5,12 +5,12 @@ using System.Text;
 
 using TasteBeer;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 // TODO show image after take
 // TODO refactor
 
-// TODO delete file after take
-// TODO resize photo to optimal size
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace ImagesInDb
 {
     public class App : Application
