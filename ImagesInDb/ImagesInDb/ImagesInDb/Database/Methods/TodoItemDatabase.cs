@@ -49,20 +49,5 @@ namespace TasteBeer
         {
             return database.DeleteAsync(item);
         }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

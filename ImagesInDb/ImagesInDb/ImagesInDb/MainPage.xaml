@@ -5,34 +5,66 @@
               >
 
  <StackLayout >
-   <Label x:Name="ix" HorizontalTextAlignment="Center" ></Label>
-   <Image x:Name="imageC" Aspect="AspectFit" HeightRequest="200"></Image>
+		<AbsoluteLayout x:Name="TakenImageAbsoluteLayout" IsVisible="False"
+		HeightRequest="250">
 
-   <ListView x:Name="listviewWithImages">
+			<Image 
+			AbsoluteLayout.LayoutFlags="All"
+			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+			x:Name="imageC" 
+			Aspect="AspectFill" 
+			 />
+		
+      <Image 
+			AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+			HeightRequest="75" 
+			Aspect="Fill" 
+			Source="bottom_up_gradient"  />
+      
+			<StackLayout
+			AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+			Spacing="0" 
+			Padding="20">
+
+				<Label 
+				Text="name" 
+				TextColor="Gray" 
+				FontSize="Large" 
+				LineBreakMode="TailTruncation"
+        x:Name="DateTimeLabel"/>
+
+				<Label 
+				Text="podtext" 
+				TextColor="Gray" 
+				FontSize="Small" 
+				LineBreakMode="WordWrap"
+        x:Name="PathLabel"/>
+      
+        </StackLayout>
+    
+   </AbsoluteLayout>
+   
+   <Label x:Name="DatabaseInfoLabel" HorizontalOptions="CenterAndExpand" ></Label>
+   <ListView x:Name="listviewWithImages" RowHeight="75" >
        <ListView.ItemTemplate>
          <DataTemplate>
            <ViewCell>
-              <Grid HeightRequest="200">
+              <Grid >
                <Grid.RowDefinitions>
                  <RowDefinition Height="*" ></RowDefinition>
                </Grid.RowDefinitions>
                <Grid.ColumnDefinitions>
+                 <ColumnDefinition Width="100"></ColumnDefinition>
                  <ColumnDefinition Width="*"></ColumnDefinition>
-                 <ColumnDefinition Width="5*"></ColumnDefinition>
                </Grid.ColumnDefinitions>
-                
-                <Image  Source="{Binding Image}" WidthRequest="150" HeightRequest="150" Grid.Row="0" Grid.Column="0"  HorizontalOptions="Center" Aspect="AspectFill" Margin="5"></Image>
-               <Label Text="{Binding Id}" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" VerticalTextAlignment="End" ></Label>
-          
+                  <Image  Source="{Binding Image}" WidthRequest="75" HeightRequest="75" Grid.Column="0" HorizontalOptions="Start" Aspect="AspectFit" Margin="5"></Image>
+                  <Label Text="{Binding PicketDateTime}" FontAttributes="Bold" Grid.Column="1" HorizontalOptions="StartAndExpand" VerticalTextAlignment="Center" ></Label>
              </Grid>
            </ViewCell>
-
          </DataTemplate>
        </ListView.ItemTemplate>
-
      </ListView>
-
-
-
 </StackLayout>
 </ContentPage>

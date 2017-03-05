@@ -14,9 +14,9 @@ namespace TasteBeer.Database.Entity
         [PrimaryKey, AutoIncrement, Indexed]
         public int Id { get;  set; }
         [NotNull]
-        public int Beer_Id { get; set; }
-        
         public string ImageRaw { get; set; }
+
+        public DateTime PicketDateTime { get; set; }
 
         [Ignore]
         public ImageSource Image
