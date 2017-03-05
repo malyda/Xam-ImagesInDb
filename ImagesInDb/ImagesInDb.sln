@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagesInDb.iOS", "ImagesInD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagesInDb.UWP", "ImagesInDb\ImagesInDb.UWP\ImagesInDb.UWP.csproj", "{B0E39EFD-A9EF-471B-9E22-C81D38F1BF66}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{868EDA9E-EC47-4B49-B42B-6803A293BB7A}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\malyd\Desktop\imagesInDb.png = C:\Users\malyd\Desktop\imagesInDb.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
