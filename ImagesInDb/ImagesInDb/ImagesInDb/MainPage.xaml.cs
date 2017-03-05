@@ -6,36 +6,35 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Plugin.Media;
-using TasteBeer.Database.Entity;
 using Xamarin.Forms;
 using Plugin.Media.Abstractions;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using FFImageLoading;
+using ImagesInDb.Database.Entity;
 
 
 namespace ImagesInDb
 {
     public partial class MainPage : ContentPage
     {
-        public ObservableCollection<BeerImage> beerImages = new ObservableCollection<BeerImage>();
-        public Func<CancellationToken, Task<Stream>> Stream { get; private set; }
-
+        /// <summary>
+        /// Images for UI
+        /// </summary>
+        public ObservableCollection<ImageEntity> Images = new ObservableCollection<ImageEntity>();
         public MainPage()
         {
             InitializeComponent();
-            Title = "Main Page";
+            Title = "Images in Database";
             Init();
        }
 
         private void Init()
         {
             CrossMedia.Current.Initialize().Wait();
-
             SetToolbarItems();
             GetBeersFromDbAndDislpay();
-
         }
 
         private void SetToolbarItems()
@@ -43,34 +42,37 @@ namespace ImagesInDb
             ToolbarItem toolbar = new ToolbarItem();
             toolbar.Icon = "camera.png";
 
-            this.ToolbarItems.Add(new ToolbarItem { Icon = "camera.png", Command = new Command(this.TakePhotoAndSave) });
-           
+            ToolbarItems.Add(new ToolbarItem { Icon = "camera.png", Command = new Command(this.TakePhotoAndSave) });
         }
 
         private void GetBeersFromDbAndDislpay()
         {
-            beerImages = new ObservableCollection<BeerImage>(App.Database.GetBeerImagesAsync().Result);
-            listviewWithImages.ItemsSource = beerImages;
-            if (beerImages.Count > 1) DatabaseInfoLabel.Text = beerImages.Count + " images in database";
+            Images = new ObservableCollection<ImageEntity>(App.Database.GetImagesAsync().Result);
+            ListviewWithImages.ItemsSource = Images;
+            if (Images.Count > 1) DatabaseInfoLabel.Text = Images.Count + " images in database";
         }
 
+        /// <summary>
+        /// Convert taken image to byte[] and then to base64 string which is saved to DB
+        /// </summary>
+        /// <param name="file">Photo</param>
+        /// <returns>base64 string</returns>
         private string ConvertImageToBase64(MediaFile file)
         {
-            BeerImage beer = new BeerImage();
+            var stream = file.GetStream();
 
-            var stream2 = file.GetStream();
-
-            System.IO.BinaryReader br = new System.IO.BinaryReader(stream2);
-            Byte[] bytes = br.ReadBytes((Int32)stream2.Length);
+            System.IO.BinaryReader br = new System.IO.BinaryReader(stream);
+            byte[] bytes = br.ReadBytes((Int32)stream.Length);
          
             return Convert.ToBase64String(bytes, 0, bytes.Length);
            
         }
+
         private async Task< MediaFile > TakePhoto()
         {
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
-              await  DisplayAlert("No Camera", ":( No camera available.", "OK");
+                await  DisplayAlert("No Camera", ":( No camera available.", "OK");
                 return null;
             }
 
@@ -95,28 +97,31 @@ namespace ImagesInDb
             MediaFile photo = await TakePhoto();
             if(photo == null) return;
             
-            // Display taken image
- 
-
+            // Convert photo to base64
             string base64 = await Task.Factory.StartNew( () =>  ConvertImageToBase64(photo));
             
-            BeerImage beerImage = new BeerImage();
-            beerImage.PicketDateTime = DateTime.Now;
-            beerImage.ImageRaw = base64;
+            // Create new Entity
+            ImageEntity imageEntity = new ImageEntity();
+            imageEntity.PicketDateTime = DateTime.Now;
+            imageEntity.ImageRaw = base64;
 
+            // Show taken image
             TakenImageAbsoluteLayout.IsVisible = true;
-            imageC.Source = ImageSource.FromFile(photo.Path);
+
+            imageThumb.Source = ImageSource.FromFile(photo.Path);
             PathLabel.Text = photo.Path;
-            DateTimeLabel.Text = beerImage.PicketDateTime.ToUniversalTime().ToString();
+            DateTimeLabel.Text = imageEntity.PicketDateTime.ToUniversalTime().ToString();
 
-          int rows =  await App.Database.SaveBeerImageAsync(beerImage);
+            // Save image to database
+            int rows = await App.Database.SaveImageAsync(imageEntity);
 
+            // refresh UI
             if (rows > 0)
             {
-                beerImages.Add(beerImage);
-                DatabaseInfoLabel.Text = beerImages.Count + " images in database";
-            
-                await  DisplayAlert("Image Saved", "Image saved", "Ok");
+                Images.Add(imageEntity);
+                DatabaseInfoLabel.Text = Images.Count + " images in database";
+
+                await DisplayAlert("Image Saved", "Image saved", "Ok");
             }
         }
     }

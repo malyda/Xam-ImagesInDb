@@ -36,9 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Database\Entity\BeerImage.cs" />
+    <Compile Include="Database\Entity\ImageEntity.cs" />
     <Compile Include="IFileHelper.cs" />
-    <Compile Include="Database\Methods\TodoItemDatabase.cs" />
+    <Compile Include="Database\Methods\ImageDatabase.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

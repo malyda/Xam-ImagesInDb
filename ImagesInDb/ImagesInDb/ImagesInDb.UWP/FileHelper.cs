@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
-using TasteBeer.UWP;
+using ImageInDb.UWP;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileHelper))]
-namespace TasteBeer.UWP
+namespace ImageInDb.UWP
 {
     public class FileHelper : IFileHelper
     {

@@ -1,10 +1,10 @@
 using System;
 using System.IO;
-using TasteBeer.iOS;
+using ImageInDb.iOS;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(FileHelper))]
-namespace TasteBeer.iOS
+namespace ImageInDb.iOS
 {
 
     public class FileHelper : IFileHelper

@@ -5,49 +5,50 @@
               >
 
  <StackLayout >
-		<AbsoluteLayout x:Name="TakenImageAbsoluteLayout" IsVisible="False"
-		HeightRequest="250">
-
+		<AbsoluteLayout x:Name="TakenImageAbsoluteLayout" IsVisible="False" HeightRequest="250">
+      
 			<Image 
-			AbsoluteLayout.LayoutFlags="All"
-			AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
-			x:Name="imageC" 
-			Aspect="AspectFill" 
+			  AbsoluteLayout.LayoutFlags="All"
+			  AbsoluteLayout.LayoutBounds="0, 0, 1, 1"
+			  x:Name="imageThumb" 
+			  Aspect="AspectFill" 
 			 />
-		
       <Image 
-			AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
-			AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
-			HeightRequest="75" 
-			Aspect="Fill" 
-			Source="bottom_up_gradient"  />
+			  AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			  AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+			  HeightRequest="75" 
+			  Aspect="Fill" 
+			  Source="bottom_up_gradient" 
+      />
       
 			<StackLayout
-			AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
-			AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
-			Spacing="0" 
-			Padding="20">
+			  AbsoluteLayout.LayoutFlags="WidthProportional, PositionProportional"
+			  AbsoluteLayout.LayoutBounds="0, 1, 1, AutoSize"
+			  Spacing="0" 
+			  Padding="20"
+      >
+        <Label 
+          Text="name" 
+          TextColor="Gray" 
+          FontSize="Large" 
+          LineBreakMode="TailTruncation"
+          x:Name="DateTimeLabel"
+        />
 
 				<Label 
-				Text="name" 
-				TextColor="Gray" 
-				FontSize="Large" 
-				LineBreakMode="TailTruncation"
-        x:Name="DateTimeLabel"/>
-
-				<Label 
-				Text="podtext" 
-				TextColor="Gray" 
-				FontSize="Small" 
-				LineBreakMode="WordWrap"
-        x:Name="PathLabel"/>
+				  Text="podtext" 
+				  TextColor="Gray" 
+				  FontSize="Small" 
+				  LineBreakMode="WordWrap"
+          x:Name="PathLabel"
+        />
       
-        </StackLayout>
+      </StackLayout>
     
    </AbsoluteLayout>
    
    <Label x:Name="DatabaseInfoLabel" HorizontalOptions="CenterAndExpand" ></Label>
-   <ListView x:Name="listviewWithImages" RowHeight="75" >
+   <ListView x:Name="ListviewWithImages" RowHeight="75" >
        <ListView.ItemTemplate>
          <DataTemplate>
            <ViewCell>

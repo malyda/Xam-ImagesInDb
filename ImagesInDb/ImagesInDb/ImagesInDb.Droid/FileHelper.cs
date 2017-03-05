@@ -9,12 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using TasteBeer.Droid;
 using Xamarin.Forms;
 using System.IO;
+using ImageInDb;
+using ImagesInDb.Droid;
 
 [assembly: Dependency(typeof(FileHelper))]
-namespace TasteBeer.Droid
+namespace ImagesInDb.Droid
 {
     public class FileHelper : IFileHelper
     {

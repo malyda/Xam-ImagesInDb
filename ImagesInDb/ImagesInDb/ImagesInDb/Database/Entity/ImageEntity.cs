@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using SQLite;
 using Xamarin.Forms;
 
-namespace TasteBeer.Database.Entity
+namespace ImagesInDb.Database.Entity
 {
-   public class BeerImage
+   public class ImageEntity
     {
         [PrimaryKey, AutoIncrement, Indexed]
         public int Id { get;  set; }
